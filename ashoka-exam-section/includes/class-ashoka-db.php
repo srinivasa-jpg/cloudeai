@@ -20,91 +20,102 @@ class Ashoka_DB {
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
         // Students table.
+        // NOTE: dbDelta() requires two spaces before PRIMARY KEY and separate UNIQUE KEY lines.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_students (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            htno VARCHAR(50) NOT NULL UNIQUE,
-            student_name VARCHAR(255) NOT NULL,
-            branch VARCHAR(100) DEFAULT '',
-            year VARCHAR(20) DEFAULT '',
-            sem VARCHAR(10) DEFAULT '',
-            section VARCHAR(5) DEFAULT '',
-            admn_no VARCHAR(50) DEFAULT '',
-            caste_category VARCHAR(50) DEFAULT '',
-            admn_dt DATE DEFAULT NULL,
-            year_of_completion VARCHAR(10) DEFAULT '',
-            dob DATE DEFAULT NULL,
-            gender TINYINT DEFAULT 0,
-            father_name VARCHAR(255) DEFAULT '',
-            mother_name VARCHAR(255) DEFAULT '',
-            parent_mobile VARCHAR(15) DEFAULT '',
-            student_mobile VARCHAR(15) DEFAULT '',
-            email VARCHAR(255) DEFAULT '',
-            dt_of_leaving DATE DEFAULT NULL,
-            discon_date DATE DEFAULT NULL,
-            roll_section_no VARCHAR(50) DEFAULT ''
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  htno VARCHAR(50) NOT NULL DEFAULT '',
+  student_name VARCHAR(255) NOT NULL DEFAULT '',
+  branch VARCHAR(100) NOT NULL DEFAULT '',
+  year VARCHAR(20) NOT NULL DEFAULT '',
+  sem VARCHAR(10) NOT NULL DEFAULT '',
+  section VARCHAR(5) NOT NULL DEFAULT '',
+  admn_no VARCHAR(50) NOT NULL DEFAULT '',
+  caste_category VARCHAR(50) NOT NULL DEFAULT '',
+  admn_dt DATE DEFAULT NULL,
+  year_of_completion VARCHAR(10) NOT NULL DEFAULT '',
+  dob DATE DEFAULT NULL,
+  gender TINYINT NOT NULL DEFAULT 0,
+  father_name VARCHAR(255) NOT NULL DEFAULT '',
+  mother_name VARCHAR(255) NOT NULL DEFAULT '',
+  parent_mobile VARCHAR(15) NOT NULL DEFAULT '',
+  student_mobile VARCHAR(15) NOT NULL DEFAULT '',
+  email VARCHAR(255) NOT NULL DEFAULT '',
+  dt_of_leaving DATE DEFAULT NULL,
+  discon_date DATE DEFAULT NULL,
+  roll_section_no VARCHAR(50) NOT NULL DEFAULT '',
+  PRIMARY KEY  (sno),
+  UNIQUE KEY htno (htno)
+) $charset_collate;";
         dbDelta( $sql );
 
         // Subjects table.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_subjects (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            sub_name VARCHAR(255) NOT NULL,
-            sub_code VARCHAR(50) NOT NULL UNIQUE,
-            credits DECIMAL(4,2) DEFAULT 0.00
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  sub_name VARCHAR(255) NOT NULL DEFAULT '',
+  sub_code VARCHAR(50) NOT NULL DEFAULT '',
+  credits DECIMAL(4,2) NOT NULL DEFAULT 0.00,
+  PRIMARY KEY  (sno),
+  UNIQUE KEY sub_code (sub_code)
+) $charset_collate;";
         dbDelta( $sql );
 
         // Faculty table.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_faculty (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            faculty_name VARCHAR(255) NOT NULL,
-            emp_code VARCHAR(50) NOT NULL
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  faculty_name VARCHAR(255) NOT NULL DEFAULT '',
+  emp_code VARCHAR(50) NOT NULL DEFAULT '',
+  PRIMARY KEY  (sno)
+) $charset_collate;";
         dbDelta( $sql );
 
         // Branches table.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_branches (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            branch_name VARCHAR(100) NOT NULL UNIQUE
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  branch_name VARCHAR(100) NOT NULL DEFAULT '',
+  PRIMARY KEY  (sno),
+  UNIQUE KEY branch_name (branch_name)
+) $charset_collate;";
         dbDelta( $sql );
 
         // Faculty-Subject Mapping table.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_faculty_subject_mapping (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            faculty_id INT NOT NULL,
-            sub_code VARCHAR(50) NOT NULL,
-            branch VARCHAR(100) NOT NULL,
-            year VARCHAR(20) NOT NULL,
-            sem VARCHAR(10) NOT NULL
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  faculty_id INT NOT NULL DEFAULT 0,
+  sub_code VARCHAR(50) NOT NULL DEFAULT '',
+  branch VARCHAR(100) NOT NULL DEFAULT '',
+  year VARCHAR(20) NOT NULL DEFAULT '',
+  sem VARCHAR(10) NOT NULL DEFAULT '',
+  PRIMARY KEY  (sno)
+) $charset_collate;";
         dbDelta( $sql );
 
         // Internal Marks table.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_internal_marks (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            student_htno VARCHAR(50) NOT NULL,
-            sub_code VARCHAR(50) NOT NULL,
-            branch VARCHAR(100) NOT NULL,
-            year VARCHAR(20) NOT NULL,
-            sem VARCHAR(10) NOT NULL,
-            mid1_marks DECIMAL(5,2) DEFAULT 0.00,
-            mid2_marks DECIMAL(5,2) DEFAULT 0.00,
-            total_marks DECIMAL(5,2) DEFAULT 0.00
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  student_htno VARCHAR(50) NOT NULL DEFAULT '',
+  sub_code VARCHAR(50) NOT NULL DEFAULT '',
+  branch VARCHAR(100) NOT NULL DEFAULT '',
+  year VARCHAR(20) NOT NULL DEFAULT '',
+  sem VARCHAR(10) NOT NULL DEFAULT '',
+  mid1_marks DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+  mid2_marks DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+  total_marks DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+  PRIMARY KEY  (sno)
+) $charset_collate;";
         dbDelta( $sql );
 
         // External Marks table.
         $sql = "CREATE TABLE {$wpdb->prefix}ashoka_external_marks (
-            sno INT AUTO_INCREMENT PRIMARY KEY,
-            student_htno VARCHAR(50) NOT NULL,
-            sub_code VARCHAR(50) NOT NULL,
-            branch VARCHAR(100) NOT NULL,
-            year VARCHAR(20) NOT NULL,
-            sem VARCHAR(10) NOT NULL,
-            external_marks DECIMAL(5,2) DEFAULT 0.00,
-            exam_type VARCHAR(10) DEFAULT 'subject'
-        ) $charset_collate;";
+  sno INT NOT NULL AUTO_INCREMENT,
+  student_htno VARCHAR(50) NOT NULL DEFAULT '',
+  sub_code VARCHAR(50) NOT NULL DEFAULT '',
+  branch VARCHAR(100) NOT NULL DEFAULT '',
+  year VARCHAR(20) NOT NULL DEFAULT '',
+  sem VARCHAR(10) NOT NULL DEFAULT '',
+  external_marks DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+  exam_type VARCHAR(10) NOT NULL DEFAULT 'subject',
+  PRIMARY KEY  (sno)
+) $charset_collate;";
         dbDelta( $sql );
     }
 

@@ -160,8 +160,8 @@ class Ashoka_Students {
         }
 
         if ( $where ) {
-            $total   = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $table $where", $args ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table $where ORDER BY sno ASC LIMIT %d OFFSET %d", array_merge( $args, array( $per_page, $offset ) ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            $total   = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $table $where", ...$args ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table $where ORDER BY sno ASC LIMIT %d OFFSET %d", ...array_merge( $args, array( $per_page, $offset ) ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         } else {
             $total   = $wpdb->get_var( "SELECT COUNT(*) FROM $table" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
             $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table ORDER BY sno ASC LIMIT %d OFFSET %d", $per_page, $offset ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared

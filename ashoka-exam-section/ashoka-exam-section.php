@@ -7,6 +7,8 @@
  * Author:      Ashoka Institute
  * License:     GPL-2.0+
  * Text Domain: ashoka-exam-section
+ * Requires at least: 5.2
+ * Requires PHP: 7.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -29,11 +31,19 @@ require_once ASHOKA_PLUGIN_DIR . 'includes/class-ashoka-internal-marks.php';
 require_once ASHOKA_PLUGIN_DIR . 'includes/class-ashoka-external-marks.php';
 require_once ASHOKA_PLUGIN_DIR . 'includes/class-ashoka-faculty-marks.php';
 
+// Bootstrap AJAX handlers on plugins_loaded so WordPress is fully initialised.
+add_action( 'plugins_loaded', 'ashoka_init_hooks' );
+function ashoka_init_hooks() {
+    Ashoka_Faculty_Marks::init();
+}
+
 // Activation hook.
 register_activation_hook( __FILE__, 'ashoka_activate' );
 function ashoka_activate() {
     Ashoka_DB::create_tables();
     Ashoka_Roles::create_roles();
+    // Store the DB version so we can run upgrades later.
+    update_option( 'ashoka_exam_db_version', ASHOKA_PLUGIN_VERSION );
 }
 
 // Deactivation hook.

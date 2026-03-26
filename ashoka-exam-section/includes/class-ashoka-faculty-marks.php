@@ -344,5 +344,3 @@ class Ashoka_Faculty_Marks {
     }
 }
 
-// Hook AJAX handlers.
-Ashoka_Faculty_Marks::init();
