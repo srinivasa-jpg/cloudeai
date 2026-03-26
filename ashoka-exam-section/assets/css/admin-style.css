@@ -1,0 +1,83 @@
+/* Ashoka Exam Section – Admin Styles */
+
+/* ── General wrap ── */
+.wrap .ashoka-table {
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+.wrap .ashoka-table th,
+.wrap .ashoka-table td {
+    padding: 8px 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.wrap .ashoka-table tbody tr:hover {
+    background-color: #f0f4ff;
+}
+
+/* ── Form table ── */
+.wrap .form-table th {
+    font-weight: 600;
+    width: 220px;
+}
+
+.wrap .form-table td input[type="text"],
+.wrap .form-table td input[type="email"],
+.wrap .form-table td input[type="date"],
+.wrap .form-table td input[type="number"],
+.wrap .form-table td select {
+    min-width: 220px;
+}
+
+/* ── Marks entry page ── */
+#ashoka-marks-filter-form {
+    border-radius: 4px;
+}
+
+#ashoka-marks-filter-form select {
+    min-width: 140px;
+}
+
+.ashoka-mid-input {
+    width: 70px !important;
+    text-align: center;
+}
+
+.ashoka-total-cell {
+    font-weight: bold;
+    color: #006633;
+}
+
+/* ── Import form toggle ── */
+#ashoka-student-import-form,
+#ashoka-subject-import-form,
+#ashoka-faculty-import-form,
+#ashoka-branch-import-form {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* ── Pagination ── */
+.tablenav-pages {
+    float: right;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 960px) {
+    .wrap .ashoka-table th,
+    .wrap .ashoka-table td {
+        white-space: normal;
+    }
+
+    #ashoka-marks-filter-form table tr,
+    #ashoka-marks-filter-form table th,
+    #ashoka-marks-filter-form table td {
+        display: block;
+        width: 100%;
+    }
+}
